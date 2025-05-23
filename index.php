@@ -1,16 +1,20 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
+    header("Location: login.php");
+    exit;
+}
+
+$username = $_SESSION['username'];
+$date = date("l, F j, Y - g:i A");
+?>
+
 <!DOCTYPE html>
 <html>
 <body>
-
-<h2>Login with your username and password</h2>
-
-<form action="/verify.php">
-  <label for="username">Username:</label><br>
-  <input type="text" id="username" name="username"><br>
-  <label for="password">Password:</label><br>
-  <input type="text" id="password" name="password"><br>
-  <input type="submit" value="Login">
-</form> 
+    <h2>Welcome, <?= $username ?>!</h2>
+    <p>Logged in at <?= $date ?></p>
+    <a href="logout.php">Logout</a>
 </body>
 </html>
-
